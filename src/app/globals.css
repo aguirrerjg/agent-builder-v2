@@ -61,6 +61,42 @@
 }
 
 /* ============================================
+   MODO OSCURO - TOKENS DE COLOR
+   ============================================ */
+
+.dark {
+  /* Colores principales */
+  --color-white: #1C1C1E;
+  --color-bg-primary: #1C1C1E;
+  --color-bg-secondary: #2C2C2E;
+  --color-surface: #2C2C2E;
+  --color-border: #3A3A3C;
+  --color-border-active: #10A37F;
+  
+  /* Texto */
+  --color-text-primary: #F5F5F7;
+  --color-text-secondary: #ACACBE;
+  --color-text-disabled: #6E6E80;
+  
+  /* Acentos */
+  --color-accent: #10A37F;
+  --color-accent-hover: #0E8C6C;
+  --color-accent-secondary: #7676FF;
+  
+  /* Estados */
+  --color-error: #FF4545;
+  --color-success: #10A37F;
+  --color-warning: #FFB020;
+  --color-bg-code: #2C2C2E;
+  
+  /* Sombras */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-dropdown: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
    ESTILOS BASE GLOBALES
    ============================================ */
 

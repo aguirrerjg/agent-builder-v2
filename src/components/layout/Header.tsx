@@ -3,6 +3,7 @@
 import { Menu, Search, BookOpen, Code2, User } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 /**
  * Header principal de la aplicación estilo OpenAI
@@ -17,18 +18,18 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 h-16 border-b border-[#E5E5E5] bg-white">
+    <header className="sticky top-0 z-50 h-16 border-b border-[#E5E5E5] dark:border-[#3A3A3C] bg-white dark:bg-[#1C1C1E] transition-colors">
       <div className="flex h-full items-center justify-between px-6">
         {/* Left Section - Logo y nombre */}
         <div className="flex items-center gap-3">
           <button
-            className="flex items-center justify-center w-9 h-9 rounded-md hover:bg-[#F7F7F8] transition-fast"
+            className="flex items-center justify-center w-9 h-9 rounded-md hover:bg-[#F7F7F8] dark:hover:bg-[#2C2C2E] transition-fast"
             aria-label="Menu"
           >
-            <Menu className="w-5 h-5 text-[#202123]" />
+            <Menu className="w-5 h-5 text-[#202123] dark:text-[#F5F5F7]" />
           </button>
           <div className="flex items-center gap-2">
-            <span className="text-lg font-semibold text-[#202123]">
+            <span className="text-lg font-semibold text-[#202123] dark:text-[#F5F5F7]">
               DigitalHubAssist
             </span>
           </div>
@@ -38,33 +39,34 @@ export function Header() {
         <div className="flex-1 max-w-2xl mx-8">
           <div
             className={cn(
-              "flex items-center gap-3 h-10 px-4 rounded-lg border border-[#E5E5E5] bg-[#F7F7F8] transition-standard",
-              "hover:border-[#D0D0D0] hover:bg-white",
-              "focus-within:border-[#10A37F] focus-within:bg-white focus-within:shadow-[0_0_0_3px_rgba(16,163,127,0.1)]",
-              searchOpen && "border-[#10A37F] bg-white shadow-[0_0_0_3px_rgba(16,163,127,0.1)]"
+              "flex items-center gap-3 h-10 px-4 rounded-lg border border-[#E5E5E5] dark:border-[#3A3A3C] bg-[#F7F7F8] dark:bg-[#2C2C2E] transition-standard",
+              "hover:border-[#D0D0D0] dark:hover:border-[#4A4A4C] hover:bg-white dark:hover:bg-[#1C1C1E]",
+              "focus-within:border-[#10A37F] focus-within:bg-white dark:focus-within:bg-[#1C1C1E] focus-within:shadow-[0_0_0_3px_rgba(16,163,127,0.1)]",
+              searchOpen && "border-[#10A37F] bg-white dark:bg-[#1C1C1E] shadow-[0_0_0_3px_rgba(16,163,127,0.1)]"
             )}
             onClick={() => setSearchOpen(true)}
           >
-            <Search className="w-4 h-4 text-[#6E6E80] flex-shrink-0" />
+            <Search className="w-4 h-4 text-[#6E6E80] dark:text-[#ACACBE] flex-shrink-0" />
             <input
               type="text"
               placeholder="Search agents, templates, docs..."
-              className="flex-1 bg-transparent border-none outline-none text-[#202123] placeholder:text-[#ACACBE] text-sm"
+              className="flex-1 bg-transparent border-none outline-none text-[#202123] dark:text-[#F5F5F7] placeholder:text-[#ACACBE] dark:placeholder:text-[#6E6E80] text-sm"
             />
-            <kbd className="hidden md:inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-[#6E6E80] bg-white border border-[#E5E5E5] rounded">
+            <kbd className="hidden md:inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-[#6E6E80] dark:text-[#ACACBE] bg-white dark:bg-[#1C1C1E] border border-[#E5E5E5] dark:border-[#3A3A3C] rounded">
               <span>⌘</span>
               <span>K</span>
             </kbd>
           </div>
         </div>
 
-        {/* Right Section - Links y Avatar */}
+        {/* Right Section - Theme Toggle, Links y Avatar */}
         <div className="flex items-center gap-6">
-          <button className="hidden md:flex items-center gap-2 text-sm text-[#202123] hover:text-[#10A37F] transition-fast">
+          <ThemeToggle />
+          <button className="hidden md:flex items-center gap-2 text-sm text-[#202123] dark:text-[#F5F5F7] hover:text-[#10A37F] dark:hover:text-[#10A37F] transition-fast">
             <BookOpen className="w-4 h-4" />
             <span>Documentation</span>
           </button>
-          <button className="hidden md:flex items-center gap-2 text-sm text-[#202123] hover:text-[#10A37F] transition-fast">
+          <button className="hidden md:flex items-center gap-2 text-sm text-[#202123] dark:text-[#F5F5F7] hover:text-[#10A37F] dark:hover:text-[#10A37F] transition-fast">
             <Code2 className="w-4 h-4" />
             <span>API</span>
           </button>

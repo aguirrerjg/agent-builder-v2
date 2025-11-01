@@ -21,13 +21,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <body className={`${inter.variable} antialiased`}>
-        <div className="flex flex-col h-screen bg-white">
+        <div className="flex flex-col h-screen bg-white dark:bg-[#1C1C1E] transition-colors">
           <Header />
           <div className="flex flex-1 overflow-hidden">
             <Sidebar />
-            <main className="flex-1 ml-[260px] overflow-y-auto">
+            <main className="flex-1 ml-[260px] overflow-y-auto bg-[#F7F7F8] dark:bg-[#1C1C1E]">
               {children}
             </main>
           </div>

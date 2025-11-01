@@ -31,11 +31,11 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-[260px] bg-[#F7F7F8] border-r border-[#E5E5E5] overflow-y-auto">
+    <aside className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-[260px] bg-[#F7F7F8] dark:bg-[#2C2C2E] border-r border-[#E5E5E5] dark:border-[#3A3A3C] overflow-y-auto transition-colors">
       <div className="flex flex-col h-full">
         {/* Workspace Header */}
-        <div className="p-4 border-b border-[#E5E5E5]">
-          <h3 className="text-sm font-semibold text-[#202123]">Workspace</h3>
+        <div className="p-4 border-b border-[#E5E5E5] dark:border-[#3A3A3C]">
+          <h3 className="text-sm font-semibold text-[#202123] dark:text-[#F5F5F7]">Workspace</h3>
         </div>
 
         {/* Projects Section */}
@@ -45,8 +45,8 @@ export function Sidebar() {
             className={cn(
               "w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-fast mb-2",
               activeItem === "projects"
-                ? "bg-white text-[#10A37F] border-l-4 border-[#10A37F]"
-                : "text-[#6E6E80] hover:bg-[#EBEBEB] hover:text-[#202123]"
+                ? "bg-white dark:bg-[#1C1C1E] text-[#10A37F] border-l-4 border-[#10A37F]"
+                : "text-[#6E6E80] dark:text-[#ACACBE] hover:bg-[#EBEBEB] dark:hover:bg-[#1C1C1E] hover:text-[#202123] dark:hover:text-[#F5F5F7]"
             )}
           >
             <FolderOpen className={cn(
@@ -65,8 +65,8 @@ export function Sidebar() {
                 className={cn(
                   "w-full flex items-center justify-between px-3 py-2 rounded-md text-sm transition-fast",
                   activeProject === project.id
-                    ? "bg-white text-[#202123] font-medium"
-                    : "text-[#6E6E80] hover:bg-[#EBEBEB] hover:text-[#202123]"
+                    ? "bg-white dark:bg-[#1C1C1E] text-[#202123] dark:text-[#F5F5F7] font-medium"
+                    : "text-[#6E6E80] dark:text-[#ACACBE] hover:bg-[#EBEBEB] dark:hover:bg-[#1C1C1E] hover:text-[#202123] dark:hover:text-[#F5F5F7]"
                 )}
               >
                 <span>• {project.name}</span>
@@ -78,7 +78,7 @@ export function Sidebar() {
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-[#E5E5E5] mb-4" />
+          <div className="h-px bg-[#E5E5E5] dark:bg-[#3A3A3C] mb-4" />
 
           {/* Navigation Items */}
           <nav className="space-y-1 mb-6">
@@ -95,8 +95,8 @@ export function Sidebar() {
                   className={cn(
                     "w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-fast",
                     activeItem === item.id
-                      ? "bg-white text-[#10A37F] border-l-4 border-[#10A37F]"
-                      : "text-[#6E6E80] hover:bg-[#EBEBEB] hover:text-[#202123]"
+                      ? "bg-white dark:bg-[#1C1C1E] text-[#10A37F] border-l-4 border-[#10A37F]"
+                      : "text-[#6E6E80] dark:text-[#ACACBE] hover:bg-[#EBEBEB] dark:hover:bg-[#1C1C1E] hover:text-[#202123] dark:hover:text-[#F5F5F7]"
                   )}
                 >
                   <Icon className={cn(
@@ -110,11 +110,11 @@ export function Sidebar() {
           </nav>
 
           {/* Divider */}
-          <div className="h-px bg-[#E5E5E5] mb-4" />
+          <div className="h-px bg-[#E5E5E5] dark:bg-[#3A3A3C] mb-4" />
         </div>
 
         {/* Create Agent Button */}
-        <div className="p-4 border-t border-[#E5E5E5]">
+        <div className="p-4 border-t border-[#E5E5E5] dark:border-[#3A3A3C]">
           <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#10A37F] text-white rounded-lg font-medium hover:bg-[#0E8C6C] transition-fast active:scale-[0.98]">
             <Plus className="w-5 h-5" />
             <span>New Agent</span>

@@ -80,14 +80,14 @@ export default function AgentsPage() {
   };
 
   return (
-    <div className="min-h-full bg-white">
+    <div className="min-h-full bg-white dark:bg-[#1C1C1E]">
       <div className="mx-auto max-w-[1280px] px-8 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-semibold text-[#202123] mb-2">
+          <h1 className="text-3xl font-semibold text-[#202123] dark:text-[#F5F5F7] mb-2">
             My Agents
           </h1>
-          <p className="text-base text-[#6E6E80]">
+          <p className="text-base text-[#6E6E80] dark:text-[#ACACBE]">
             Build and manage your AI agents
           </p>
         </div>

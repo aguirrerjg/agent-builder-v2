@@ -46,7 +46,7 @@ export function AgentCard({ agent, onClick, onMenuClick }: AgentCardProps) {
   return (
     <div
       className={cn(
-        "bg-white border border-[#E5E5E5] rounded-xl p-4 cursor-pointer transition-standard group",
+        "bg-white dark:bg-[#2C2C2E] border border-[#E5E5E5] dark:border-[#3A3A3C] rounded-xl p-4 cursor-pointer transition-standard group",
         "hover:border-[#10A37F] hover:shadow-[0_4px_12px_rgba(16,163,127,0.1)] hover:-translate-y-0.5",
         "min-h-[200px] flex flex-col"
       )}
@@ -57,10 +57,10 @@ export function AgentCard({ agent, onClick, onMenuClick }: AgentCardProps) {
       {/* Header */}
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#F7F7F8] flex items-center justify-center border border-[#E5E5E5]">
+          <div className="w-8 h-8 rounded-lg bg-[#F7F7F8] dark:bg-[#1C1C1E] flex items-center justify-center border border-[#E5E5E5] dark:border-[#3A3A3C]">
             <Sparkles className="w-4 h-4 text-[#10A37F]" />
           </div>
-          <h3 className="text-base font-semibold text-[#202123] line-clamp-1">
+          <h3 className="text-base font-semibold text-[#202123] dark:text-[#F5F5F7] line-clamp-1">
             {agent.name}
           </h3>
         </div>
@@ -69,7 +69,7 @@ export function AgentCard({ agent, onClick, onMenuClick }: AgentCardProps) {
             e.stopPropagation();
             onMenuClick?.(e);
           }}
-          className="p-1 rounded-md text-[#6E6E80] hover:text-[#202123] hover:bg-[#F7F7F8] transition-fast opacity-0 group-hover:opacity-100"
+          className="p-1 rounded-md text-[#6E6E80] dark:text-[#ACACBE] hover:text-[#202123] dark:hover:text-[#F5F5F7] hover:bg-[#F7F7F8] dark:hover:bg-[#1C1C1E] transition-fast opacity-0 group-hover:opacity-100"
           aria-label="More options"
         >
           <MoreVertical className="w-5 h-5" />
@@ -77,7 +77,7 @@ export function AgentCard({ agent, onClick, onMenuClick }: AgentCardProps) {
       </div>
 
       {/* Description */}
-      <p className="text-sm text-[#6E6E80] leading-relaxed mb-4 line-clamp-2 flex-1">
+      <p className="text-sm text-[#6E6E80] dark:text-[#ACACBE] leading-relaxed mb-4 line-clamp-2 flex-1">
         {agent.description}
       </p>
 
@@ -87,7 +87,7 @@ export function AgentCard({ agent, onClick, onMenuClick }: AgentCardProps) {
           {agent.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="px-2.5 py-1 text-xs font-medium text-[#6E6E80] bg-[#F7F7F8] rounded-md hover:bg-[#EBEBEB] transition-fast"
+              className="px-2.5 py-1 text-xs font-medium text-[#6E6E80] dark:text-[#ACACBE] bg-[#F7F7F8] dark:bg-[#1C1C1E] rounded-md hover:bg-[#EBEBEB] dark:hover:bg-[#2C2C2E] transition-fast"
             >
               {tag}
             </span>
@@ -96,8 +96,8 @@ export function AgentCard({ agent, onClick, onMenuClick }: AgentCardProps) {
       )}
 
       {/* Footer */}
-      <div className="pt-3 border-t border-[#F0F0F0]">
-        <div className="flex items-center gap-2 text-xs text-[#6E6E80]">
+      <div className="pt-3 border-t border-[#F0F0F0] dark:border-[#3A3A3C]">
+        <div className="flex items-center gap-2 text-xs text-[#6E6E80] dark:text-[#ACACBE]">
           <span>{formatNumber(agent.totalRuns)} runs</span>
           <span>·</span>
           <span>{agent.successRate.toFixed(0)}% success</span>
