@@ -37,11 +37,14 @@ export function Header() {
           >
             <Menu className="w-5 h-5 text-[#202123] dark:text-[#F5F5F7]" />
           </button>
-          <div className="flex items-center gap-2">
+          <button 
+            onClick={() => router.push("/")}
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          >
             <span className="text-lg font-semibold text-[#202123] dark:text-[#F5F5F7]">
-              DigitalHubAssist
+              Your Company
             </span>
-          </div>
+          </button>
         </div>
 
         {/* Center Section - Search */}
