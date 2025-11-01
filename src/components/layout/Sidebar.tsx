@@ -1,0 +1,127 @@
+"use client";
+
+import { 
+  FolderOpen, 
+  Star, 
+  BarChart3, 
+  Settings, 
+  Plus,
+  ChevronRight 
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
+
+/**
+ * Sidebar izquierdo estilo ChatGPT/OpenAI
+ * 
+ * Características:
+ * - Lista de proyectos
+ * - Navegación principal
+ * - Botón destacado para crear nuevo agente
+ * - Estado activo con borde verde
+ */
+export function Sidebar() {
+  const [activeProject, setActiveProject] = useState<string | null>(null);
+  const [activeItem, setActiveItem] = useState<string>("projects");
+
+  const projects = [
+    { id: "1", name: "Marketing Hub" },
+    { id: "2", name: "Sales Assistant" },
+    { id: "3", name: "Data Analyzer" },
+  ];
+
+  return (
+    <aside className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-[260px] bg-[#F7F7F8] border-r border-[#E5E5E5] overflow-y-auto">
+      <div className="flex flex-col h-full">
+        {/* Workspace Header */}
+        <div className="p-4 border-b border-[#E5E5E5]">
+          <h3 className="text-sm font-semibold text-[#202123]">Workspace</h3>
+        </div>
+
+        {/* Projects Section */}
+        <div className="flex-1 p-4">
+          <button
+            onClick={() => setActiveItem("projects")}
+            className={cn(
+              "w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-fast mb-2",
+              activeItem === "projects"
+                ? "bg-white text-[#10A37F] border-l-4 border-[#10A37F]"
+                : "text-[#6E6E80] hover:bg-[#EBEBEB] hover:text-[#202123]"
+            )}
+          >
+            <FolderOpen className={cn(
+              "w-4 h-4",
+              activeItem === "projects" ? "text-[#10A37F]" : ""
+            )} />
+            <span>My Projects</span>
+          </button>
+
+          {/* Project List */}
+          <div className="ml-7 space-y-1 mb-6">
+            {projects.map((project) => (
+              <button
+                key={project.id}
+                onClick={() => setActiveProject(project.id)}
+                className={cn(
+                  "w-full flex items-center justify-between px-3 py-2 rounded-md text-sm transition-fast",
+                  activeProject === project.id
+                    ? "bg-white text-[#202123] font-medium"
+                    : "text-[#6E6E80] hover:bg-[#EBEBEB] hover:text-[#202123]"
+                )}
+              >
+                <span>• {project.name}</span>
+                {activeProject === project.id && (
+                  <ChevronRight className="w-4 h-4" />
+                )}
+              </button>
+            ))}
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-[#E5E5E5] mb-4" />
+
+          {/* Navigation Items */}
+          <nav className="space-y-1 mb-6">
+            {[
+              { id: "templates", icon: Star, label: "Templates" },
+              { id: "analytics", icon: BarChart3, label: "Analytics" },
+              { id: "settings", icon: Settings, label: "Settings" },
+            ].map((item) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveItem(item.id)}
+                  className={cn(
+                    "w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-fast",
+                    activeItem === item.id
+                      ? "bg-white text-[#10A37F] border-l-4 border-[#10A37F]"
+                      : "text-[#6E6E80] hover:bg-[#EBEBEB] hover:text-[#202123]"
+                  )}
+                >
+                  <Icon className={cn(
+                    "w-4 h-4",
+                    activeItem === item.id ? "text-[#10A37F]" : ""
+                  )} />
+                  <span>{item.label}</span>
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Divider */}
+          <div className="h-px bg-[#E5E5E5] mb-4" />
+        </div>
+
+        {/* Create Agent Button */}
+        <div className="p-4 border-t border-[#E5E5E5]">
+          <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#10A37F] text-white rounded-lg font-medium hover:bg-[#0E8C6C] transition-fast active:scale-[0.98]">
+            <Plus className="w-5 h-5" />
+            <span>New Agent</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
