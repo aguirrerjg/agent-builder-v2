@@ -55,11 +55,11 @@ export function FlowSidebar() {
   };
 
   const renderCategory = (title: string, nodes: typeof nodeCategories.core) => (
-    <div className="mb-6">
-      <h3 className="text-xs font-semibold text-[#6E6E80] uppercase mb-2 px-3">
+    <div className="mb-8">
+      <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3 px-3">
         {title}
       </h3>
-      <div className="space-y-1">
+      <div className="space-y-2">
         {nodes.map((node) => {
           const Icon = node.icon;
           return (
@@ -68,17 +68,26 @@ export function FlowSidebar() {
               draggable
               onDragStart={(e) => onDragStart(e, node.type)}
               className={cn(
-                "flex items-center gap-3 px-3 py-2 rounded-md cursor-grab active:cursor-grabbing",
-                "hover:bg-[#2C2C2E] transition-fast group"
+                "flex items-center gap-3 px-3 py-2.5 rounded-2xl cursor-grab active:cursor-grabbing group relative overflow-hidden",
+                "hover:bg-white/10 backdrop-blur-sm transition-all duration-300",
+                "border border-transparent hover:border-white/20"
               )}
             >
+              {/* Subtle glow on hover */}
               <div 
-                className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0"
-                style={{ backgroundColor: `${node.color}20` }}
+                className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity blur-xl"
+                style={{ backgroundColor: node.color }}
+              />
+              
+              <div 
+                className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 relative z-10 shadow-lg"
+                style={{ 
+                  background: `linear-gradient(135deg, ${node.color}, ${node.color}dd)`,
+                }}
               >
-                <Icon className="w-4 h-4" style={{ color: node.color }} />
+                <Icon className="w-4 h-4 text-white" />
               </div>
-              <span className="text-sm text-[#ACACBE] group-hover:text-[#F5F5F7] transition-fast">
+              <span className="text-sm text-white/80 group-hover:text-white transition-colors font-medium relative z-10">
                 {node.label}
               </span>
             </div>
@@ -89,8 +98,8 @@ export function FlowSidebar() {
   );
 
   return (
-    <aside className="w-64 border-r border-[#2C2C2E] bg-[#1C1C1E] overflow-y-auto">
-      <div className="p-4">
+    <aside className="w-72 border-r border-white/10 bg-white/5 backdrop-blur-2xl overflow-y-auto">
+      <div className="p-5">
         {renderCategory("Core", nodeCategories.core)}
         {renderCategory("Tools", nodeCategories.tools)}
         {renderCategory("Logic", nodeCategories.logic)}

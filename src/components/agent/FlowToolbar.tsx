@@ -27,15 +27,18 @@ export function FlowToolbar({
   const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <header className="h-14 border-b border-[#2C2C2E] bg-[#1C1C1E] flex items-center justify-between px-4">
+    <header className="h-16 border-b border-white/10 bg-white/5 backdrop-blur-2xl flex items-center justify-between px-6 relative">
+      {/* Subtle gradient line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      
       {/* Left Section */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4">
         <button
           onClick={() => router.push("/")}
-          className="flex items-center justify-center w-8 h-8 rounded-md hover:bg-[#2C2C2E] transition-fast"
+          className="flex items-center justify-center w-10 h-10 rounded-xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm border border-transparent hover:border-white/20"
           aria-label="Back"
         >
-          <ArrowLeft className="w-5 h-5 text-[#ACACBE]" />
+          <ArrowLeft className="w-5 h-5 text-white/60 hover:text-white transition-colors" />
         </button>
 
         {/* Agent Name */}
@@ -47,19 +50,19 @@ export function FlowToolbar({
               onChange={(e) => onNameChange(e.target.value)}
               onBlur={() => setIsEditing(false)}
               onKeyDown={(e) => e.key === "Enter" && setIsEditing(false)}
-              className="bg-[#2C2C2E] border border-[#3A3A3C] rounded-md px-3 py-1 text-[#F5F5F7] text-sm outline-none focus:border-[#10A37F]"
+              className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl px-4 py-2 text-white text-sm outline-none focus:border-[#10A37F] focus:ring-2 focus:ring-[#10A37F]/20 transition-all"
               autoFocus
             />
           ) : (
             <button
               onClick={() => setIsEditing(true)}
-              className="text-[#F5F5F7] text-sm font-medium hover:text-[#10A37F] transition-fast"
+              className="text-white text-base font-semibold hover:text-[#10A37F] transition-colors"
             >
               {agentName}
             </button>
           )}
           {isDraft && (
-            <span className="px-2 py-0.5 text-xs font-medium text-[#ACACBE] bg-[#2C2C2E] rounded border border-[#3A3A3C]">
+            <span className="px-3 py-1 text-xs font-semibold text-white/70 bg-white/10 backdrop-blur-xl rounded-full border border-white/20">
               Draft
             </span>
           )}
@@ -70,37 +73,37 @@ export function FlowToolbar({
       <div className="flex items-center gap-3">
         <button
           onClick={onSave}
-          className="flex items-center gap-2 px-3 py-1.5 text-sm text-[#ACACBE] hover:text-[#F5F5F7] hover:bg-[#2C2C2E] rounded-md transition-fast"
+          className="flex items-center gap-2 px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 backdrop-blur-sm border border-transparent hover:border-white/20"
         >
           <Save className="w-4 h-4" />
-          <span>Save</span>
+          <span className="font-medium">Save</span>
         </button>
 
         <button
-          className="flex items-center gap-2 px-3 py-1.5 text-sm text-[#ACACBE] hover:text-[#F5F5F7] hover:bg-[#2C2C2E] rounded-md transition-fast"
+          className="flex items-center gap-2 px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 backdrop-blur-sm border border-transparent hover:border-white/20"
         >
           <Code className="w-4 h-4" />
-          <span>Code</span>
+          <span className="font-medium">Code</span>
         </button>
 
         <button
-          className="flex items-center gap-2 px-3 py-1.5 text-sm text-[#ACACBE] hover:text-[#F5F5F7] hover:bg-[#2C2C2E] rounded-md transition-fast"
+          className="flex items-center gap-2 px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 backdrop-blur-sm border border-transparent hover:border-white/20"
         >
           <Eye className="w-4 h-4" />
-          <span>Preview</span>
+          <span className="font-medium">Preview</span>
         </button>
 
-        <div className="w-px h-6 bg-[#3A3A3C]" />
+        <div className="w-px h-6 bg-white/10" />
 
         <button
           onClick={onPublish}
-          className="px-4 py-1.5 bg-[#10A37F] text-white text-sm font-medium rounded-md hover:bg-[#0E8C6C] transition-fast"
+          className="px-5 py-2.5 bg-gradient-to-r from-[#10A37F] to-[#0E8C6C] text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-[#10A37F]/30 transition-all duration-300 transform hover:scale-105"
         >
           Publish
         </button>
 
-        <button className="flex items-center justify-center w-8 h-8 rounded-md hover:bg-[#2C2C2E] transition-fast">
-          <MoreVertical className="w-5 h-5 text-[#ACACBE]" />
+        <button className="flex items-center justify-center w-10 h-10 rounded-xl hover:bg-white/10 transition-all duration-300 backdrop-blur-sm border border-transparent hover:border-white/20">
+          <MoreVertical className="w-5 h-5 text-white/60 hover:text-white transition-colors" />
         </button>
       </div>
     </header>

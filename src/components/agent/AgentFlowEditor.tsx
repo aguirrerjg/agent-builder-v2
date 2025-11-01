@@ -132,7 +132,7 @@ export function AgentFlowEditor() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-[#0A0A0A]">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-[#0F0F14] via-[#141420] to-[#1A1A2E]">
       {/* Top Toolbar */}
       <FlowToolbar
         agentName={agentName}
@@ -143,7 +143,13 @@ export function AgentFlowEditor() {
       />
 
       {/* Main Content: Sidebar + Flow */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden relative">
+        {/* Animated background orbs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#10A37F]/10 rounded-full blur-[120px] animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#5B5BD6]/10 rounded-full blur-[120px] animate-pulse delay-1000" />
+        </div>
+
         {/* Left Sidebar */}
         <FlowSidebar />
 
@@ -159,25 +165,38 @@ export function AgentFlowEditor() {
             onDragOver={onDragOver}
             nodeTypes={nodeTypes}
             fitView
-            className="bg-[#0A0A0A]"
+            className="bg-transparent"
             defaultEdgeOptions={{
               type: "smoothstep",
               animated: true,
-              style: { stroke: "#3A3A3C", strokeWidth: 2 },
+              style: { 
+                stroke: "url(#gradient)",
+                strokeWidth: 3,
+                filter: "drop-shadow(0 0 8px rgba(16, 163, 127, 0.3))"
+              },
             }}
           >
+            {/* Gradient definition for edges */}
+            <svg style={{ position: 'absolute', width: 0, height: 0 }}>
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#10A37F" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#5B5BD6" stopOpacity="0.8" />
+                </linearGradient>
+              </defs>
+            </svg>
             <Background 
               variant={BackgroundVariant.Dots} 
-              gap={20} 
-              size={1}
-              color="#2C2C2E"
+              gap={24} 
+              size={1.5}
+              color="rgba(255, 255, 255, 0.05)"
             />
             <Controls 
-              className="bg-[#1C1C1E] border border-[#3A3A3C] rounded-lg shadow-lg"
+              className="!bg-white/5 !backdrop-blur-xl !border !border-white/10 !rounded-2xl !shadow-2xl !shadow-black/50"
               showInteractive={false}
             />
             <MiniMap
-              className="bg-[#1C1C1E] border border-[#3A3A3C] rounded-lg"
+              className="!bg-white/5 !backdrop-blur-xl !border !border-white/10 !rounded-2xl !shadow-2xl"
               nodeColor={(node) => {
                 switch (node.type) {
                   case "start":
