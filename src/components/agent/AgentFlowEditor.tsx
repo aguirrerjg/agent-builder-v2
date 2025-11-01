@@ -19,6 +19,7 @@ import "@xyflow/react/dist/style.css";
 import { FlowSidebar } from "./FlowSidebar";
 import { FlowToolbar } from "./FlowToolbar";
 import { NodePanel } from "./NodePanel";
+import { FlowControls } from "./FlowControls";
 import { AgentNode } from "./nodes/AgentNode";
 import { StartNode } from "./nodes/StartNode";
 import { EndNode } from "./nodes/EndNode";
@@ -239,10 +240,6 @@ export function AgentFlowEditor({ agentId, agentName: initialAgentName }: AgentF
               size={1.5}
               color="rgba(255, 255, 255, 0.05)"
             />
-            <Controls 
-              className="!bg-white/5 !backdrop-blur-xl !border !border-white/10 !rounded-2xl !shadow-2xl !shadow-black/50"
-              showInteractive={false}
-            />
             <MiniMap
               className="!bg-white/5 !backdrop-blur-xl !border !border-white/10 !rounded-2xl !shadow-2xl"
               nodeColor={(node) => {
@@ -264,6 +261,9 @@ export function AgentFlowEditor({ agentId, agentName: initialAgentName }: AgentF
               maskColor="rgba(0, 0, 0, 0.6)"
             />
           </ReactFlow>
+
+          {/* Flow Controls */}
+          <FlowControls />
 
           {/* Node Panel */}
           <NodePanel
