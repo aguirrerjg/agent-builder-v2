@@ -63,16 +63,17 @@ const initialEdges: Edge[] = [
 
 interface AgentFlowEditorProps {
   agentId?: string;
+  agentName?: string;
 }
 
 /**
  * Editor de flujo visual para agentes
  * Estilo OpenAI mejorado con nuestro diseño
  */
-export function AgentFlowEditor({ agentId }: AgentFlowEditorProps = {}) {
+export function AgentFlowEditor({ agentId, agentName: initialAgentName }: AgentFlowEditorProps = {}) {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const [agentName, setAgentName] = useState(agentId ? `Agent ${agentId}` : "New workflow");
+  const [agentName, setAgentName] = useState(initialAgentName || "New workflow");
   const [isDraft, setIsDraft] = useState(!agentId);
 
   const onConnect = useCallback(

@@ -1,6 +1,7 @@
 "use client";
 
 import { AgentFlowEditor } from "@/components/agent/AgentFlowEditor";
+import { useAgents } from "@/contexts/AgentsContext";
 import { use } from "react";
 
 /**
@@ -9,7 +10,11 @@ import { use } from "react";
  */
 export default function EditAgentPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
+  const { agents } = useAgents();
   
-  return <AgentFlowEditor agentId={resolvedParams.id} />;
+  // Buscar el agente por ID
+  const agent = agents.find(a => a.id === resolvedParams.id);
+  
+  return <AgentFlowEditor agentId={resolvedParams.id} agentName={agent?.name} />;
 }
 
