@@ -24,7 +24,8 @@ import { EndNode } from "./nodes/EndNode";
 import { ToolNode } from "./nodes/ToolNode";
 import { LogicNode } from "./nodes/LogicNode";
 import { NoteNode } from "./nodes/NoteNode";
-import { DataNode } from "./nodes/DataNode";
+import { TransformNode } from "./nodes/TransformNode";
+import { SetStateNode } from "./nodes/SetStateNode";
 
 const nodeTypes = {
   start: StartNode,
@@ -33,7 +34,8 @@ const nodeTypes = {
   tool: ToolNode,
   logic: LogicNode,
   note: NoteNode,
-  data: DataNode,
+  transform: TransformNode,
+  setstate: SetStateNode,
 };
 
 const initialNodes: Node[] = [
@@ -126,7 +128,8 @@ export function AgentFlowEditor({ agentId, agentName: initialAgentName }: AgentF
       logic: "Logic Block",
       end: "End Point",
       note: "Add notes",
-      data: "Transform data",
+      transform: "Transform data",
+      setstate: "Update state",
     };
     return descriptions[type] || "";
   };

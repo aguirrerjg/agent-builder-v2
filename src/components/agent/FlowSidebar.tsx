@@ -40,8 +40,8 @@ const nodeCategories = {
     { id: "user-approval", type: "logic", icon: UserCheck, label: "User approval", color: "#EC4899" },
   ],
   data: [
-    { id: "transform", type: "data", icon: Database, label: "Transform", color: "#10B981" },
-    { id: "set-state", type: "data", icon: Settings2, label: "Set state", color: "#10B981" },
+    { id: "transform", type: "transform", icon: Database, label: "Transform", color: "#10B981" },
+    { id: "set-state", type: "setstate", icon: Settings2, label: "Set state", color: "#10B981" },
   ],
 };
 
