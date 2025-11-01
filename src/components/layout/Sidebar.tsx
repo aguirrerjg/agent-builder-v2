@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 /**
  * Sidebar izquierdo estilo ChatGPT/OpenAI
@@ -21,14 +22,17 @@ import { useState } from "react";
  * - Estado activo con borde verde
  */
 export function Sidebar() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [activeProject, setActiveProject] = useState<string | null>(null);
-  const [activeItem, setActiveItem] = useState<string>("projects");
 
   const projects = [
     { id: "1", name: "Marketing Hub" },
     { id: "2", name: "Sales Assistant" },
     { id: "3", name: "Data Analyzer" },
   ];
+
+  const isActive = (path: string) => pathname === path;
 
   return (
     <aside className="fixed left-0 top-16 h-[calc(100vh-4rem)] w-[260px] bg-[#F7F7F8] dark:bg-[#2C2C2E] border-r border-[#E5E5E5] dark:border-[#3A3A3C] overflow-y-auto transition-colors">
@@ -41,17 +45,17 @@ export function Sidebar() {
         {/* Projects Section */}
         <div className="flex-1 p-4">
           <button
-            onClick={() => setActiveItem("projects")}
+            onClick={() => router.push("/")}
             className={cn(
               "w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-fast mb-2",
-              activeItem === "projects"
+              isActive("/")
                 ? "bg-white dark:bg-[#1C1C1E] text-[#10A37F] border-l-4 border-[#10A37F]"
                 : "text-[#6E6E80] dark:text-[#ACACBE] hover:bg-[#EBEBEB] dark:hover:bg-[#1C1C1E] hover:text-[#202123] dark:hover:text-[#F5F5F7]"
             )}
           >
             <FolderOpen className={cn(
               "w-4 h-4",
-              activeItem === "projects" ? "text-[#10A37F]" : ""
+              isActive("/") ? "text-[#10A37F]" : ""
             )} />
             <span>My Projects</span>
           </button>
@@ -83,25 +87,26 @@ export function Sidebar() {
           {/* Navigation Items */}
           <nav className="space-y-1 mb-6">
             {[
-              { id: "templates", icon: Star, label: "Templates" },
-              { id: "analytics", icon: BarChart3, label: "Analytics" },
-              { id: "settings", icon: Settings, label: "Settings" },
+              { id: "templates", icon: Star, label: "Templates", path: "/templates" },
+              { id: "analytics", icon: BarChart3, label: "Analytics", path: "/analytics" },
+              { id: "settings", icon: Settings, label: "Settings", path: "/settings" },
             ].map((item) => {
               const Icon = item.icon;
+              const active = isActive(item.path);
               return (
                 <button
                   key={item.id}
-                  onClick={() => setActiveItem(item.id)}
+                  onClick={() => router.push(item.path)}
                   className={cn(
                     "w-full flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-fast",
-                    activeItem === item.id
+                    active
                       ? "bg-white dark:bg-[#1C1C1E] text-[#10A37F] border-l-4 border-[#10A37F]"
                       : "text-[#6E6E80] dark:text-[#ACACBE] hover:bg-[#EBEBEB] dark:hover:bg-[#1C1C1E] hover:text-[#202123] dark:hover:text-[#F5F5F7]"
                   )}
                 >
                   <Icon className={cn(
                     "w-4 h-4",
-                    activeItem === item.id ? "text-[#10A37F]" : ""
+                    active ? "text-[#10A37F]" : ""
                   )} />
                   <span>{item.label}</span>
                 </button>

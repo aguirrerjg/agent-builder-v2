@@ -2,6 +2,7 @@
 
 import { Menu, Search, BookOpen, Code2, User } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { SearchModal } from "@/components/ui/SearchModal";
@@ -18,6 +19,7 @@ import { useAgents } from "@/contexts/AgentsContext";
  * - Avatar del usuario con menú
  */
 export function Header() {
+  const router = useRouter();
   const [searchOpen, setSearchOpen] = useState(false);
   const { agents } = useAgents();
 
@@ -69,11 +71,17 @@ export function Header() {
         {/* Right Section - Theme Toggle, Links y Avatar */}
         <div className="flex items-center gap-6">
           <ThemeToggle />
-          <button className="hidden md:flex items-center gap-2 text-sm text-[#202123] dark:text-[#F5F5F7] hover:text-[#10A37F] dark:hover:text-[#10A37F] transition-fast">
+          <button 
+            onClick={() => router.push("/documentation")}
+            className="hidden md:flex items-center gap-2 text-sm text-[#202123] dark:text-[#F5F5F7] hover:text-[#10A37F] dark:hover:text-[#10A37F] transition-fast"
+          >
             <BookOpen className="w-4 h-4" />
             <span>Documentation</span>
           </button>
-          <button className="hidden md:flex items-center gap-2 text-sm text-[#202123] dark:text-[#F5F5F7] hover:text-[#10A37F] dark:hover:text-[#10A37F] transition-fast">
+          <button 
+            onClick={() => router.push("/api")}
+            className="hidden md:flex items-center gap-2 text-sm text-[#202123] dark:text-[#F5F5F7] hover:text-[#10A37F] dark:hover:text-[#10A37F] transition-fast"
+          >
             <Code2 className="w-4 h-4" />
             <span>API</span>
           </button>

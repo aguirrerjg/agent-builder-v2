@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { Search, Sparkles, FileText, Book, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -34,6 +35,7 @@ interface SearchResult {
  * - Resultados destacados
  */
 export function SearchModal({ isOpen, onClose, agents }: SearchModalProps) {
+  const router = useRouter();
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [category, setCategory] = useState<SearchCategory>("all");
@@ -145,7 +147,20 @@ export function SearchModal({ isOpen, onClose, agents }: SearchModalProps) {
   const handleResultClick = (result: SearchResult) => {
     console.log("Selected:", result);
     onClose();
-    // Aquí navegarías o abrirías el item seleccionado
+    
+    // Navegar según la categoría
+    switch (result.category) {
+      case "agent":
+        // Por ahora solo muestra en consola, luego navegará al detalle del agente
+        console.log("Opening agent:", result.id);
+        break;
+      case "template":
+        router.push("/templates");
+        break;
+      case "doc":
+        router.push("/documentation");
+        break;
+    }
   };
 
   if (!isOpen) return null;
