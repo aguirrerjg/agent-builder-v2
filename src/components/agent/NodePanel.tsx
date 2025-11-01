@@ -48,6 +48,9 @@ export function NodePanel({ selectedNode, onClose, onDelete, onUpdate }: NodePan
     return colors[type || "agent"] || "#5B5BD6";
   };
 
+  // Nodos críticos que no se pueden eliminar
+  const isCriticalNode = selectedNode.type === "start" || selectedNode.type === "end";
+
   return (
     <AnimatePresence>
       <motion.div
@@ -168,13 +171,31 @@ export function NodePanel({ selectedNode, onClose, onDelete, onUpdate }: NodePan
 
         {/* Footer Actions */}
         <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-white/10 bg-gradient-to-t from-black/20 to-transparent backdrop-blur-xl">
-          <button
-            onClick={onDelete}
-            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-red-500/20 to-red-600/20 hover:from-red-500/30 hover:to-red-600/30 border border-red-500/30 hover:border-red-500/50 text-red-300 hover:text-red-200 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95"
-          >
-            <Trash2 className="w-5 h-5" />
-            Delete Node
-          </button>
+          {isCriticalNode ? (
+            <div className="flex items-start gap-3 px-4 py-3 bg-white/5 border border-white/10 rounded-2xl">
+              <div className="w-6 h-6 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-amber-400 text-xs">⚠️</span>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-white/70 mb-1">
+                  Critical Node
+                </p>
+                <p className="text-xs text-white/50 leading-relaxed">
+                  {selectedNode.type === "start" 
+                    ? "The Start node cannot be deleted as it's the entry point of your workflow."
+                    : "The End node cannot be deleted as it's the exit point of your workflow."}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={onDelete}
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-red-500/20 to-red-600/20 hover:from-red-500/30 hover:to-red-600/30 border border-red-500/30 hover:border-red-500/50 text-red-300 hover:text-red-200 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95"
+            >
+              <Trash2 className="w-5 h-5" />
+              Delete Node
+            </button>
+          )}
         </div>
       </motion.div>
     </AnimatePresence>
