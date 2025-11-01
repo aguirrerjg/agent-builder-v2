@@ -18,6 +18,7 @@ import {
 import "@xyflow/react/dist/style.css";
 import { FlowSidebar } from "./FlowSidebar";
 import { FlowToolbar } from "./FlowToolbar";
+import { NodePanel } from "./NodePanel";
 import { AgentNode } from "./nodes/AgentNode";
 import { StartNode } from "./nodes/StartNode";
 import { EndNode } from "./nodes/EndNode";
@@ -77,6 +78,7 @@ export function AgentFlowEditor({ agentId, agentName: initialAgentName }: AgentF
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [agentName, setAgentName] = useState(initialAgentName || "New workflow");
   const [isDraft, setIsDraft] = useState(!agentId);
+  const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
@@ -145,6 +147,36 @@ export function AgentFlowEditor({ agentId, agentName: initialAgentName }: AgentF
     // Aquí publicarías el workflow
   };
 
+  const handleNodeClick = useCallback((_event: React.MouseEvent, node: Node) => {
+    setSelectedNode(node);
+  }, []);
+
+  const handlePaneClick = useCallback(() => {
+    setSelectedNode(null);
+  }, []);
+
+  const handleNodeUpdate = useCallback((data: any) => {
+    if (!selectedNode) return;
+    setNodes((nds) =>
+      nds.map((node) => {
+        if (node.id === selectedNode.id) {
+          return { ...node, data };
+        }
+        return node;
+      })
+    );
+    setSelectedNode({ ...selectedNode, data });
+  }, [selectedNode, setNodes]);
+
+  const handleNodeDelete = useCallback(() => {
+    if (!selectedNode) return;
+    setNodes((nds) => nds.filter((node) => node.id !== selectedNode.id));
+    setEdges((eds) => eds.filter((edge) => 
+      edge.source !== selectedNode.id && edge.target !== selectedNode.id
+    ));
+    setSelectedNode(null);
+  }, [selectedNode, setNodes, setEdges]);
+
   return (
     <div className="h-screen flex flex-col bg-gradient-to-br from-[#0F0F14] via-[#141420] to-[#1A1A2E]">
       {/* Top Toolbar */}
@@ -177,6 +209,8 @@ export function AgentFlowEditor({ agentId, agentName: initialAgentName }: AgentF
             onConnect={onConnect}
             onDrop={onDrop}
             onDragOver={onDragOver}
+            onNodeClick={handleNodeClick}
+            onPaneClick={handlePaneClick}
             nodeTypes={nodeTypes}
             fitView
             className="bg-transparent"
@@ -230,6 +264,14 @@ export function AgentFlowEditor({ agentId, agentName: initialAgentName }: AgentF
               maskColor="rgba(0, 0, 0, 0.6)"
             />
           </ReactFlow>
+
+          {/* Node Panel */}
+          <NodePanel
+            selectedNode={selectedNode}
+            onClose={() => setSelectedNode(null)}
+            onDelete={handleNodeDelete}
+            onUpdate={handleNodeUpdate}
+          />
         </div>
       </div>
     </div>
