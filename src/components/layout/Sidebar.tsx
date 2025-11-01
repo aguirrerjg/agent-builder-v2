@@ -120,7 +120,10 @@ export function Sidebar() {
 
         {/* Create Agent Button */}
         <div className="p-4 border-t border-[#E5E5E5] dark:border-[#3A3A3C]">
-          <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#10A37F] text-white rounded-lg font-medium hover:bg-[#0E8C6C] transition-fast active:scale-[0.98]">
+          <button 
+            onClick={() => router.push("/agent/new")}
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#10A37F] text-white rounded-lg font-medium hover:bg-[#0E8C6C] transition-fast active:scale-[0.98]"
+          >
             <Plus className="w-5 h-5" />
             <span>New Agent</span>
           </button>

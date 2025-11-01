@@ -1,6 +1,7 @@
 "use client";
 
 import { Sparkles, Plus, LayoutTemplate } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 interface EmptyStateProps {
@@ -14,6 +15,24 @@ interface EmptyStateProps {
  * Se muestra cuando no hay agentes creados
  */
 export function EmptyState({ onCreateAgent, onBrowseTemplates }: EmptyStateProps) {
+  const router = useRouter();
+  
+  const handleCreateAgent = () => {
+    if (onCreateAgent) {
+      onCreateAgent();
+    } else {
+      router.push("/agent/new");
+    }
+  };
+
+  const handleBrowseTemplates = () => {
+    if (onBrowseTemplates) {
+      onBrowseTemplates();
+    } else {
+      router.push("/templates");
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 text-center">
       {/* Icon */}
@@ -34,7 +53,7 @@ export function EmptyState({ onCreateAgent, onBrowseTemplates }: EmptyStateProps
       {/* Action Buttons */}
       <div className="flex flex-col sm:flex-row gap-3 mb-12">
         <button
-          onClick={onCreateAgent}
+          onClick={handleCreateAgent}
           className={cn(
             "flex items-center justify-center gap-2 px-6 py-3 bg-[#10A37F] text-white rounded-lg",
             "font-medium hover:bg-[#0E8C6C] transition-fast active:scale-[0.98]"
@@ -45,7 +64,7 @@ export function EmptyState({ onCreateAgent, onBrowseTemplates }: EmptyStateProps
         </button>
 
         <button
-          onClick={onBrowseTemplates}
+          onClick={handleBrowseTemplates}
           className={cn(
             "flex items-center justify-center gap-2 px-6 py-3 bg-transparent text-[#202123] dark:text-[#F5F5F7] rounded-lg",
             "font-medium border border-[#E5E5E5] dark:border-[#3A3A3C] hover:border-[#10A37F] hover:bg-[#F7F7F8] dark:hover:bg-[#2C2C2E] transition-fast"
