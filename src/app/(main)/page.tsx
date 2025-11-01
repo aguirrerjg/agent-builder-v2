@@ -4,6 +4,7 @@ import { AgentCard } from "@/components/ui/AgentCard";
 import { EmptyState } from "@/components/ui/EmptyState";
 import type { Agent } from "@/types/agent";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useAgents } from "@/contexts/AgentsContext";
 
 /**
@@ -13,6 +14,7 @@ import { useAgents } from "@/contexts/AgentsContext";
  * Si no hay agentes, muestra el Empty State
  */
 export default function HomePage() {
+  const router = useRouter();
   const { setAgents } = useAgents();
   
   // Datos de ejemplo - luego vendrán de una API o estado global
@@ -67,8 +69,8 @@ export default function HomePage() {
   }, [agents, setAgents]);
 
   const handleAgentClick = (agentId: string) => {
-    console.log("Agent clicked:", agentId);
-    // Aquí abrirás el panel lateral de detalles
+    // Navegar al editor de flujo del agente
+    router.push(`/agent/${agentId}`);
   };
 
   const handleMenuClick = (agentId: string) => (e: React.MouseEvent) => {
