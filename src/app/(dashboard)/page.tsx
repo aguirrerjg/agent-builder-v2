@@ -3,7 +3,8 @@
 import { AgentCard } from "@/components/ui/AgentCard";
 import { EmptyState } from "@/components/ui/EmptyState";
 import type { Agent } from "@/types/agent";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAgents } from "@/contexts/AgentsContext";
 
 /**
  * Página principal - Grid de Agentes
@@ -12,6 +13,8 @@ import { useState } from "react";
  * Si no hay agentes, muestra el Empty State
  */
 export default function AgentsPage() {
+  const { setAgents } = useAgents();
+  
   // Datos de ejemplo - luego vendrán de una API o estado global
   const [agents] = useState<Agent[]>([
     {
@@ -57,6 +60,11 @@ export default function AgentsPage() {
       createdBy: "user-1",
     },
   ]);
+
+  // Actualizar agentes en el contexto
+  useEffect(() => {
+    setAgents(agents);
+  }, [agents, setAgents]);
 
   const handleAgentClick = (agentId: string) => {
     console.log("Agent clicked:", agentId);

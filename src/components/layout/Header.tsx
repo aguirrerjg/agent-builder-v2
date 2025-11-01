@@ -4,6 +4,9 @@ import { Menu, Search, BookOpen, Code2, User } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { SearchModal } from "@/components/ui/SearchModal";
+import { useKeyboardShortcut } from "@/hooks/useKeyboardShortcut";
+import { useAgents } from "@/contexts/AgentsContext";
 
 /**
  * Header principal de la aplicación estilo OpenAI
@@ -16,6 +19,10 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
  */
 export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
+  const { agents } = useAgents();
+
+  // Atajo de teclado ⌘K / Ctrl+K
+  useKeyboardShortcut("k", () => setSearchOpen(true));
 
   return (
     <header className="sticky top-0 z-50 h-16 border-b border-[#E5E5E5] dark:border-[#3A3A3C] bg-white dark:bg-[#1C1C1E] transition-colors">
@@ -75,7 +82,13 @@ export function Header() {
           </button>
         </div>
       </div>
+
+      {/* Search Modal */}
+      <SearchModal
+        isOpen={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        agents={agents}
+      />
     </header>
   );
 }
-
