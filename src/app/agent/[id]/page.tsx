@@ -1,8 +1,14 @@
 "use client";
 
-import { AgentFlowEditor } from "@/components/agent/AgentFlowEditor";
+import dynamic from "next/dynamic";
 import { useAgents } from "@/contexts/AgentsContext";
 import { use } from "react";
+
+// Importar AgentFlowEditor solo en el cliente para evitar problemas de SSR con React Flow
+const AgentFlowEditor = dynamic(
+  () => import("@/components/agent/AgentFlowEditor").then((mod) => ({ default: mod.AgentFlowEditor })),
+  { ssr: false }
+);
 
 /**
  * Página para editar un agente existente
