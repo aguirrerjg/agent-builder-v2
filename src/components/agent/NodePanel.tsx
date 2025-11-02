@@ -4,11 +4,17 @@ import { X, Trash2, Settings, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Node } from "@xyflow/react";
 
+interface NodeData {
+  label?: string;
+  description?: string;
+  [key: string]: any;
+}
+
 interface NodePanelProps {
-  selectedNode: Node | null;
+  selectedNode: Node<NodeData> | null;
   onClose: () => void;
   onDelete: () => void;
-  onUpdate: (data: any) => void;
+  onUpdate: (data: NodeData) => void;
 }
 
 /**

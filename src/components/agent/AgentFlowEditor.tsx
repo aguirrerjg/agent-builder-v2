@@ -79,7 +79,7 @@ export function AgentFlowEditor({ agentId, agentName: initialAgentName }: AgentF
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [agentName, setAgentName] = useState(initialAgentName || "New workflow");
   const [isDraft, setIsDraft] = useState(!agentId);
-  const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+  const [selectedNode, setSelectedNode] = useState<Node<any> | null>(null);
 
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
@@ -148,7 +148,7 @@ export function AgentFlowEditor({ agentId, agentName: initialAgentName }: AgentF
     // Aquí publicarías el workflow
   };
 
-  const handleNodeClick = useCallback((_event: React.MouseEvent, node: Node) => {
+  const handleNodeClick = useCallback((_event: React.MouseEvent, node: Node<any>) => {
     setSelectedNode(node);
   }, []);
 
