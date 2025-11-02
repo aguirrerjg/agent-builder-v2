@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 import {
   ReactFlow,
+  ReactFlowProvider,
   Node,
   Edge,
   Controls,
@@ -179,15 +180,16 @@ export function AgentFlowEditor({ agentId, agentName: initialAgentName }: AgentF
   }, [selectedNode, setNodes, setEdges]);
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-[#0F0F14] via-[#141420] to-[#1A1A2E]">
-      {/* Top Toolbar */}
-      <FlowToolbar
-        agentName={agentName}
-        isDraft={isDraft}
-        onNameChange={setAgentName}
-        onSave={handleSave}
-        onPublish={handlePublish}
-      />
+    <ReactFlowProvider>
+      <div className="h-screen flex flex-col bg-gradient-to-br from-[#0F0F14] via-[#141420] to-[#1A1A2E]">
+        {/* Top Toolbar */}
+        <FlowToolbar
+          agentName={agentName}
+          isDraft={isDraft}
+          onNameChange={setAgentName}
+          onSave={handleSave}
+          onPublish={handlePublish}
+        />
 
       {/* Main Content: Sidebar + Flow */}
       <div className="flex flex-1 overflow-hidden relative">
@@ -274,7 +276,8 @@ export function AgentFlowEditor({ agentId, agentName: initialAgentName }: AgentF
           />
         </div>
       </div>
-    </div>
+      </div>
+    </ReactFlowProvider>
   );
 }
 
