@@ -22,7 +22,7 @@ export default function HomePage() {
     {
       id: "1",
       name: "Neuro-Predictor (Cortex)",
-      description: "Predicts the outcome of a given situation based on the data provided.",
+      description: "Predice el resultado de una situación determinada basándose en los datos proporcionados.",
       status: "active",
       capabilities: ["natural-language-processing", "web-search"],
       tags: ["Neuro", "Content", "Prediction"],
@@ -36,8 +36,7 @@ export default function HomePage() {
     {
       id: "2",
       name: "Sentinela N0 (Triage)",
-      description: "Triage and analyze datasets, creates visualizations, and provides insights from your business data using advanced AI models.",
-      status: "active",
+      description: "Clasifica y analiza conjuntos de datos, crea visualizaciones y proporciona insights a partir de tus datos empresariales utilizando modelos avanzados de IA.",
       capabilities: ["data-analysis", "code-generation"],
       tags: ["Sentinela", "Triage", "AI"],
       totalRuns: 856,
@@ -50,7 +49,7 @@ export default function HomePage() {
     {
       id: "3",
       name: "Auto-Fixer (Ejecución)",
-      description: "Fixes errors in the execution of a given task.",
+      description: "Corrige errores en la ejecución de una tarea asignada.",
       status: "active",
       capabilities: ["natural-language-processing", "api-integration"],
       tags: ["Auto-Fixer", "Execution", "AI"],
