@@ -37,6 +37,7 @@ export default function HomePage() {
       id: "2",
       name: "Sentinela N0 (Triage)",
       description: "Clasifica y analiza conjuntos de datos, crea visualizaciones y proporciona insights a partir de tus datos empresariales utilizando modelos avanzados de IA.",
+      status: "active",
       capabilities: ["data-analysis", "code-generation"],
       tags: ["Sentinela", "Triage", "AI"],
       totalRuns: 856,
